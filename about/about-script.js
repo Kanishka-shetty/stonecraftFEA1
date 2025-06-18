@@ -2,7 +2,6 @@
   fetch("http://localhost:1337/api/aboutpages")
     .then(res => res.json())
     .then(data => {
-      const content = data.data[0];
 
       // Hero Section
       document.getElementById("about-heading-one").textContent = content.headingOne || "Default Heading";
@@ -31,6 +30,7 @@
     fetch("http://localhost:1337/api/aboutpages?populate=*")
   .then(res => res.json())
   .then(data => {
+    
     const content = data.data[0];
 
     const videoData = content.aboutVideo?.[0];

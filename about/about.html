@@ -20,10 +20,10 @@
 
     <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
       <ul class="navbar-nav flex-row flex-wrap gap-3">
-        <li class="nav-item fw-bold"><a class="nav-link text-white" href="main.html">Home</a></li>
+        <li class="nav-item fw-bold"><a class="nav-link text-white" href="../index.html">Home</a></li>
         <li class="nav-item fw-bold"><a class="nav-link text-white" href="about.html">About</a></li>
-        <li class="nav-item fw-bold"><a class="nav-link text-white" href="products.html">Products</a></li>
-        <li class="nav-item fw-bold"><a class="nav-link text-white" href="contact.html">Contact</a></li>
+        <li class="nav-item fw-bold"><a class="nav-link text-white" href="../index.html#product-section">Products</a></li>
+<li class="nav-item fw-bold"><a class="nav-link text-white" href="#site-footer">Contact</a></li>
       </ul>
 
       <div class="d-flex fw-bold gap-5 ms-auto">
@@ -109,13 +109,13 @@
 
 <div id="footer-container"></div>
   <script>
-    fetch("footer.html")
+    fetch("../footer/footer.html")
       .then(response => response.text())
       .then(data => {
         document.getElementById("footer-container").innerHTML = data;
 
         const script = document.createElement("script");
-        script.src = "footer-script.js"; 
+        script.src = "../footer/footer-script.js"; 
         document.body.appendChild(script);
       })
       .catch(err => console.error("Error loading footer:", err));
