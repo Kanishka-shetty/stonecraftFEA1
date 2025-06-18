@@ -1,0 +1,83 @@
+<style>
+  .products-section {
+  padding: 4rem 1rem;
+  background: linear-gradient(to bottom, #000000, #0a0f2c);
+  text-align: center;
+}
+
+.product-card {
+  background: #10164c; /* darker, cleaner card */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+.product-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.product-card > div {
+  padding: 10px;
+}
+
+.product-title {
+  background: rgba(0, 0, 0, 0.6);
+  color: #f8c6dc;
+  padding: 0.5rem;
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  right: 0;
+  font-weight: 600;
+  text-align: center;
+}
+
+.product-card .btn {
+  margin: 10px;
+  border: 1px solid #f8c6dc;
+  color: #f8c6dc;
+  background: transparent;
+  transition: 0.3s;
+}
+
+.product-card .btn:hover {
+  background: #f8c6dc;
+  color: #10164c;
+}
+
+.products-section h2 {
+  color: white;
+  font-weight: bold;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.products-section p.lead {
+  color: whitesmoke;
+  font-size: 1.1rem;
+  max-width: 700px;
+  margin: 0 auto 3rem;
+}
+
+</style>
+<section id="product-section">
+<div style="background-color: #d494a8;">
+  <div class="products-section">
+    <h2 id="products-heading">Products We Offer</h2>
+    <p id="products-para" class="lead">A high-end stone brand that continuously evolves with natural elements</p>
+    <div class="products-container row justify-content-center gy-3"></div>
+  </div>
+</div>
+</div>
+</section>
