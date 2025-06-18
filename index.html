@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Main Page - Stonecraft</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <!-- HEAD of main.html -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <!-- <link rel="stylesheet" href="testimonialstyle.css"> -->
+  <!-- Swiper JS -->
+</head>
+
+<body>
+  <!-- Hero section placeholder -->
+  <div id="hero-container"></div>
+  <!-- Script to load hero and about.html -->
+  <script>fetch("hero/hero.html")
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById("hero-container").innerHTML = data;
+
+        const script = document.createElement("script");
+        script.src = "hero/heroabout-script.js";
+        document.body.appendChild(script);
+      })
+      .catch(err => console.error("Error loading hero section:", err));
+  </script>
+
+  <!-- Script to load products.html -->
+<section id="products-section">
+  <div id="products-placeholder"></div>
+</section>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script>
+        fetch('products/products-partial.html')
+            .then(res => res.text())
+            .then(html => {
+                document.getElementById('products-placeholder').innerHTML = html;
+                const script = document.createElement('script');
+                script.src = 'products/products-script.js';
+                document.body.appendChild(script);
+            })
+            .catch(err => {
+                console.error('Failed to load products-partial.html:', err);
+            });
+    </script> 
+
+  <!-- ✅ Testimonials Section (add this) -->
+  <div id="testimonials-section"></div>
+  <script>
+    fetch('testimonial/testimonials.html')
+      .then(res => res.text())
+      .then(data => {
+        const section = document.getElementById('testimonials-section');
+        section.innerHTML = data;
+
+        // ✅ Dynamically load testimonials-script.js after content is injected
+        const script = document.createElement('script');
+        script.src = 'testimonial/testimonials-script.js'; // or 'js/script.js' depending on your folder
+        script.defer = true; // optional, to make sure DOM is ready
+        document.body.appendChild(script);
+      });
+  </script>
+
+  <div id="brands-placeholder"></div>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <script>
+    fetch('brand/brands-main.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('brands-placeholder').innerHTML = html;
+        // After the HTML is injected, load the JS file
+        const script = document.createElement('script');
+        script.src = 'brand/brands-main-script.js';
+        document.body.appendChild(script);
+      })
+      .catch(err => {
+        console.error('Failed to load brands-main.html:', err);
+      });
+  </script>
+
+  <!-- Footer placeholder -->
+<!-- Footer wrapper with ID for scrolling -->
+<section id="footer-section">
+  <div id="footer-placeholder"></div>
+</section>
+  <!-- Script to load footer.html -->
+  <script>
+    fetch("footer/footer.html")
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById("footer-placeholder").innerHTML = data;
+
+        // OPTIONAL: re-run the footer script after loading, if needed
+        const script = document.createElement("script");
+        script.src = "footer/footer-script.js"; // move your script from <footer.html> into this file
+        document.body.appendChild(script);
+      })
+      .catch(err => console.error("Error loading footer:", err));
+  </script>
+
+</body>
+
+</html>
