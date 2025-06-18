@@ -1,0 +1,87 @@
+<style>
+.brands-section .brand-card {
+  background: #000000e2;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 0 auto;
+  text-align: center;
+  height: 160px; 
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.brands-section .brand-card img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Mobile-specific Swiper fixes */
+.brand-swiper {
+    padding-bottom: 10px; /* Space for pagination */
+    overflow: hidden;
+}
+
+.swiper-slide {
+    width: 100% !important;
+    padding: 0 5px;
+    box-sizing: border-box;
+}
+
+.swiper-slide .brand-card {
+    height: 120px;
+    margin-bottom: 15px;
+}
+
+.swiper-slide .brand-card:last-child {
+    margin-bottom: 0;
+}
+
+.swiper-pagination {
+    bottom: 10px !important;
+}
+
+.brand-card img {
+    max-height: 100%;
+    max-width: 90%;
+    object-fit: contain;
+}
+.brand-card {
+  display: flex !important;
+  align-items: center !important;     /* Vertical center */
+  justify-content: center !important; /* Horizontal center */
+  width: 100% !important;
+  height: 120px !important;           /* Fixed card height */
+  background: #000000e2 !important;   /* Your dark background */
+  border-radius: 10px !important;
+  padding: 10px !important;
+  overflow: hidden !important;        /* Hide overflow */
+}
+</style>
+
+<!-- Desktop View -->
+<section class="brands-section py-5 d-none d-md-block" style="background-color: rgba(5, 9, 51, 0.892);">
+    <div class="container">
+        <h2 class="text-center text-light mb-5 pb-3 fw-bold fs-1" id="brand-heading-desktop">Our Brands</h2>
+        <div class="mx-auto mt-4">
+            <div class="row g-4" id="brands-desktop"></div>
+        </div>
+    </div>
+</section>
+
+<!-- Mobile View -->
+<section class="py-5 d-md-none" style="background-color: rgba(3, 3, 24, 0.832)">
+    <div class="container">
+        <h2 class="text-center text-light mb-4 pb-3 fw-bold fs-1" id="brand-heading-mobile">Our Clit</h2>
+        <div class="swiper brand-swiper">
+            <div class="swiper-wrapper" id="brands-mobile"> <!-- Slides injected here --></div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+</section>
+
