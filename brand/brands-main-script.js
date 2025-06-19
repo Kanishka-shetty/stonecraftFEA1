@@ -1,5 +1,5 @@
 
-fetch('http://localhost:1337/api/brandheading')
+fetch('https://meaningful-horse-99e25d03c1.strapiapp.com/api/brandheading')
     .then(res => res.json())
     .then(data => {
         const heading = data.data.heading || 'Our Brand';
@@ -10,7 +10,7 @@ fetch('http://localhost:1337/api/brandheading')
         console.error('Error fetching brand heading:', err);
     });
 
-fetch('http://localhost:1337/api/brands?populate=images')
+fetch('https://meaningful-horse-99e25d03c1.strapiapp.com/api/brands?populate=images')
     .then(res => res.json())
     .then(data => {
         const brands = data.data;
@@ -24,7 +24,7 @@ fetch('http://localhost:1337/api/brands?populate=images')
             images.forEach(image => {
                 const imgUrl = image.url || '';
                 const name = image.name || 'Brand';
-                const fullUrl = `http://localhost:1337${imgUrl}`;
+                const fullUrl = `https://meaningful-horse-99e25d03c1.strapiapp.com${imgUrl}`;
 
                 const col = document.createElement('div');
                 col.className = 'col-md-4 mb-4';
@@ -53,7 +53,7 @@ fetch('http://localhost:1337/api/brands?populate=images')
             group.forEach(image => {
                 const imgUrl = image.url || '';
                 const name = image.name || 'Brand';
-                const fullUrl = `http://localhost:1337${imgUrl}`;
+                const fullUrl = `https://meaningful-horse-99e25d03c1.strapiapp.com${imgUrl}`;
 
                 slide.innerHTML += `
             <div class="brand-card">

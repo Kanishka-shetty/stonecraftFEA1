@@ -1,5 +1,5 @@
 
-  fetch("http://localhost:1337/api/aboutpages")
+ fetch("https://meaningful-horse-99e25d03c1.strapiapp.com/api/aboutpages?populate=*")
     .then(res => res.json())
     .then(data => {
 
@@ -27,7 +27,7 @@
     })
     .catch(err => console.error("Error fetching About Page data:", err));
 
-    fetch("http://localhost:1337/api/aboutpages?populate=*")
+  fetch("https://meaningful-horse-99e25d03c1.strapiapp.com/api/aboutpages?populate=*")
   .then(res => res.json())
   .then(data => {
     
@@ -35,7 +35,7 @@
 
     const videoData = content.aboutVideo?.[0];
     if (videoData && videoData.url) {
-      const videoUrl = "http://localhost:1337" + videoData.url;
+      const videoUrl = "https://meaningful-horse-99e25d03c1.strapiapp.com" + videoData.url;
       const videoSource = document.createElement("source");
       videoSource.src = videoUrl;
       videoSource.type = "video/mp4";

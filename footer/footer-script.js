@@ -1,5 +1,5 @@
 
-      fetch("http://localhost:1337/api/footers")
+      fetch("https://meaningful-horse-99e25d03c1.strapiapp.com/api/footers")
         .then(res => res.json())
         .then(data => {
           const footerData = data.data[0];
