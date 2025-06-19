@@ -119,7 +119,7 @@
     </script>
 
     <script>
-        fetch('http://localhost:1337/api/granites?populate=image')
+        fetch('https://meaningful-horse-99e25d03c1.strapiapp.com/api/granites?populate=image')
             .then(res => res.json())
             .then(data => {
                 console.log("granite API response:", data);
@@ -138,7 +138,7 @@
                     if (!imageArray || imageArray.length === 0) return;
 
                     const imageUrl = imageArray[0].url || imageArray[0].formats?.thumbnail?.url;
-                    const fullImageUrl = imageUrl.startsWith('http') ? imageUrl : 'http://localhost:1337' + imageUrl;
+                    const fullImageUrl = imageUrl.startsWith('http') ? imageUrl : 'https://meaningful-horse-99e25d03c1.strapiapp.com' + imageUrl;
 
                     const card = `
     <div class="col-6 col-sm-6 col-md-4 col-lg-3">

@@ -1,4 +1,4 @@
-fetch('http://localhost:1337/api/graniteheading?populate=images')
+fetch('https://meaningful-horse-99e25d03c1.strapiapp.com/api/graniteheading?populate=images')
   .then(res => res.json())
   .then(data => {
     const heading = data.data.heading || "Default Heading";
@@ -7,7 +7,7 @@ fetch('http://localhost:1337/api/graniteheading?populate=images')
     const images = data.data.images || [];
     if (images.length > 0) {
       const imageUrl = images[0].url;
-      const fullUrl = imageUrl.startsWith('http') ? imageUrl : `http://localhost:1337${imageUrl}`;
+      const fullUrl = imageUrl.startsWith('http') ? imageUrl : `https://meaningful-horse-99e25d03c1.strapiapp.com${imageUrl}`;
 
       const heroSection = document.querySelector('.position-relative.bg-dark.text-white');
       if (heroSection) {

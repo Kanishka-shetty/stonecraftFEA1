@@ -1,4 +1,4 @@
-fetch("http://localhost:1337/api/products?populate=image")
+fetch("https://meaningful-horse-99e25d03c1.strapiapp.com/api/products?populate=image")
   .then(res => res.json())
   .then(data => {
     const products = data.data;
@@ -14,7 +14,7 @@ fetch("http://localhost:1337/api/products?populate=image")
       if (!images || images.length === 0) return;
 
       const imageUrl = images[0].url;
-      const fullImageUrl = imageUrl.startsWith("http") ? imageUrl : "http://localhost:1337" + imageUrl;
+      const fullImageUrl = imageUrl.startsWith("http") ? imageUrl : "https://meaningful-horse-99e25d03c1.strapiapp.com" + imageUrl;
 
       // ✅ Create Bootstrap column
       const col = document.createElement('div');

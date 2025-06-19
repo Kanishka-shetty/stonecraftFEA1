@@ -24,8 +24,7 @@ fetch('https://meaningful-horse-99e25d03c1.strapiapp.com/api/brands?populate=ima
             images.forEach(image => {
                 const imgUrl = image.url || '';
                 const name = image.name || 'Brand';
-                const fullUrl = `https://meaningful-horse-99e25d03c1.strapiapp.com${imgUrl}`;
-
+                const fullUrl = image.url || '';
                 const col = document.createElement('div');
                 col.className = 'col-md-4 mb-4';
                 col.innerHTML = `
@@ -53,8 +52,7 @@ fetch('https://meaningful-horse-99e25d03c1.strapiapp.com/api/brands?populate=ima
             group.forEach(image => {
                 const imgUrl = image.url || '';
                 const name = image.name || 'Brand';
-                const fullUrl = `https://meaningful-horse-99e25d03c1.strapiapp.com${imgUrl}`;
-
+                const fullUrl = image.url || '';
                 slide.innerHTML += `
             <div class="brand-card">
               <img src="${fullUrl}" alt="${name}">
