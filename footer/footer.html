@@ -1,49 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>About Us,html - Stonecraft</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 </head>
+
 <body>
-<footer id="site-footer" class="bg-black text-white pt-4">
-  <div class="container px-4" style="max-width: 1100px;">
-    <div class="row">
-      <div class="col-md-6 mb-3">
-        <h5>Company:</h5>
-        <p>Stonecraft Premium Tiles & Marbles</p>
-        <p>Redefining elegance and durability with premium textures.</p>
-      </div>
-      <div class="col-md-6 mb-3">
-        <h5>Contact:</h5>
+  <footer id="site-footer" class="bg-black text-white pt-4">
+    <div class="container px-4" style="max-width: 1100px;">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <h5>Company:</h5>
+          <p id="company-name"></p>
+          <p id="company-tagline"></p>
+        </div>
 
-        <!-- <p><i class="fas fa-phone-alt me-2"></i> <span id="footer-phone"></span></p>
-        <p><i class="fas fa-envelope me-2"></i> <span id="footer-email"></span></p> -->
-        <p><i class="fas fa-phone-alt me-2"></i><a id="footer-phone" href=""></a></p>
-        <p><i class="fas fa-envelope me-2"></i> <a id="footer-email" href=""></a></p>
-        <p><i class="fas fa-map-marker-alt me-2"></i> <span id="footer-address"></span></p>
-      </div>
-    </div>
-  </div>
-  <div class="bg-dark py-3">
-    <div class="container text-center">
-      <a href="https://www.facebook.com" class="text-white me-3 fs-4"><i class="fab fa-facebook-f"></i></a>
-      <a href="https://www.instagram.com" class="text-white me-3 fs-4"><i class="fab fa-instagram"></i></a>
-      <a href="https://www.twitter.com" class="text-white me-3 fs-4"><i class="fab fa-twitter"></i></a>
-      <a href="https://www.linkedin.com" class="text-white fs-4"><i class="fab fa-linkedin-in"></i></a>
-    </div>
-  </div>
-  <div class="bg-black py-2">
-    <div class="container text-center">
-      <p class="mb-0 small">&copy; 2025 Stonecraft. All Rights Reserved.</p>
-    </div>
-  </div>
-</footer>
+        <div class="container py-4">
+          <div class="row">
+            <div class="col-md-6 mb-4">
+              <h5 id="branch1-title"></h5>
+              <p>📍 <span id="addressOne"></span></p>
+              <p>📞 <a id="phoneOne" href="#"></a></p>
+              <p>✉️ <a id="emailOne" href="#"></a></p>
+              <div class="map-container shadow rounded" style="overflow: hidden; max-width: 100%;">
+                <iframe id="branch1-map" width="100%" height="150" style="border:0; border-radius: 10px;"
+                  allowfullscreen="" loading="lazy"></iframe>
+              </div>
+            </div>
 
-<div id="footer-container"></div>
+            <div class="col-md-6 mb-4">
+              <h5 id="branch2-title"></h5>
+              <p>📍 <span id="addressTwo"></span></p>
+              <p>📞 <a id="phoneTwo" href="#"></a></p>
+              <p>✉️ <a id="emailTwo" href="#"></a></p>
+              <div class="map-container shadow rounded" style="overflow: hidden; max-width: 100%;">
+                <iframe id="branch2-map" width="100%" height="150" style="border:0; border-radius: 10px;"
+                  allowfullscreen="" loading="lazy"></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-dark py-3">
+        <div class="container text-center">
+          <a id="facebook-link" class="text-white me-3 fs-4"><i class="fab fa-facebook-f"></i></a>
+          <a id="instagram-link" class="text-white me-3 fs-4"><i class="fab fa-instagram"></i></a>
+          <a id="twitter-link" class="text-white me-3 fs-4"><i class="fab fa-twitter"></i></a>
+          <a id="whatsapp-link" class="text-white me-3 fs-4"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+
+      <div class="bg-black py-2">
+        <div class="container text-center">
+          <p class="mb-0 small">&copy; 2025 Stonecraft. All Rights Reserved.</p>
+        </div>
+      </div>
+  </footer>
 
 </body>
+
 </html>

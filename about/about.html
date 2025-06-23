@@ -7,6 +7,69 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<style>
+.management-section {
+  padding: 4rem 1rem;
+  background: linear-gradient(to bottom, #000000, #040411eb);
+  color: #fff;
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 2.5rem;
+}
+
+.team-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 0 14px rgba(255, 77, 77, 0.1);
+}
+
+.image-side {
+  background: linear-gradient(135deg, #0e0e2a, #3e0a0a);
+  padding: 1rem;
+}
+
+.split-img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 5px solid #26143c;
+}
+
+.text-side {
+  background-color: rgba(255, 255, 255, 0.02);
+  padding: 1.5rem;
+  border-left: 2px solid rgba(255, 255, 255, 0.05);
+}
+
+.text-side h5 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.title {
+  font-size: 0.95rem;
+  color: #ccc;
+  margin-bottom: 0.75rem;
+}
+
+.quote {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #aaa;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 10px 15px;
+  border-left: 4px solid #4d56ff;
+  border-radius: 6px;
+}
+
+
+</style>
 
 </head>
 <body class=" bg-white text-whiteborder-start border-end border-5 border-dark">
@@ -27,8 +90,8 @@
       </ul>
 
       <div class="d-flex fw-bold gap-5 ms-auto">
-        <a class="text-white mr-3" href="https://www.instagram.com"><i class="fab fa-instagram fa-lg"></i></a>
-        <a class="text-white mr-3" href="https://www.facebook.com"><i class="fab fa-facebook fa-lg"></i></a>
+        <a class="text-white mr-3" href="#"><i class="fab fa-instagram fa-lg"></i></a>
+        <a class="text-white mr-3" href="#"><i class="fab fa-facebook fa-lg"></i></a>
       </div>
     </div>
   </div>
@@ -36,12 +99,11 @@
 
 <div id="about-video" class="position-relative" style="height: 40vh; overflow: hidden;">
 <video autoplay muted loop playsinline class="w-100 h-100 object-fit-cover position-absolute top-0 start-0" id="about-hero-video">
-  <!-- JS will add sourc  here -->
   Your browser does not support the video tag.
 </video>
   <div class="position-relative text-white d-flex flex-column justify-content-center align-items-center h-100" style="z-index: 1; background-color: rgba(0, 0, 0, 0.4);">
-    <h1 id="about-heading-one" class="display-4 fw-bold">About </h1>
-    <p  id="about-tagline" class="lead text-center px-3" style="max-width: 600px;"> Discover our story, our mission, and the people behind the premium craftsmanship.</p>
+    <h1 id="about-heading-one" class="display-4 fw-bold">About Stonecraft</h1>
+    <p  id="about-tagline" class="lead text-center px-3" style="max-width: 600px;">Elegance in every tile. Discover our story, our mission, and the people behind the premium craftsmanship.</p>
   </div>
 </div>
 <!-- About Stonecraft Section -->
@@ -49,10 +111,10 @@
   <div class=" text-center">
     <h2 id="about-headingtwo" class=" fw-bold fs-1 text-light pb-4 " style="font-family: 'Times New Roman', Times, serif;">Our Story</h2>
     <p id="about-para-one" class="text-secondary">
-      Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Stonecraft blends tradition and innovation, offering premium quality tiles that elevate spaces with timeless style.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Stonecraft blends tradition and innovation, offering premium quality tiles that elevate spaces with timeless style.
     </p>
     <p id="about-para-two" class="text-secondary">
-       Stonecraft continues to be a trusted name in the industry. Our mission is to deliver durability, beauty, and functionality through every tile.
+      With a legacy of excellence and a commitment to craftsmanship, Stonecraft continues to be a trusted name in the industry. Our mission is to deliver durability, beauty, and functionality through every tile.
     </p>
   </div>
 </section>
@@ -67,9 +129,9 @@
       <div class="col-6 col-md-6 col-lg-3">
         <div class="p-4 rounded shadow text-center d-flex flex-column h-100" style="background-color: #0d1b2a; color: #f1f1f1;">
           <i class="fas fa-handshake fa-2x mb-3"></i>
-          <h5 id="value-one" class="fw-bold">IntegrityY</h5>
+          <h5 id="value-one" class="fw-bold">Integrity</h5>
           <p id="value-para-one" class="small">
-            transparency in all our actions, building lasting trust with our customers and partners.
+            We stand by honesty and transparency in all our actions, building lasting trust with our customers and partners.
           </p>
         </div>
       </div>
@@ -77,9 +139,9 @@
       <div class="col-6 col-md-6 col-lg-3">
         <div class="p-4 rounded shadow text-center d-flex flex-column h-100" style="background-color: #0d1b2a; color: #f1f1f1;">
           <i class="fas fa-chart-line fa-2x mb-3"></i>
-          <h5 id="value-two" class="fw-bold">Progres</h5>
+          <h5 id="value-two" class="fw-bold">Progress</h5>
           <p id="value-para-two" class="small">
-            In continuous growth and innovation to provide better solutions for evolving needs.
+            We believe in continuous growth and innovation to provide better solutions for evolving needs.
           </p>
         </div>
       </div>
@@ -87,9 +149,9 @@
       <div class="col-6 col-md-6 col-lg-3">
         <div class="p-4 rounded shadow text-center d-flex flex-column h-100" style="background-color: #0d1b2a; color: #f1f1f1;">
           <i class="fas fa-leaf fa-2x mb-3"></i>
-          <h5 id="value-three" class="fw-bold">Sustainabilityyy</h5>
+          <h5 id="value-three" class="fw-bold">Sustainability</h5>
           <p id="value-para-three" class="small">
-           Committed to preserving the environment by using sustainable practices in our production and delivery.
+            We are committed to preserving the environment by using sustainable practices in our production and delivery.
           </p>
         </div>
       </div>
@@ -97,15 +159,64 @@
       <div class="col-6 col-md-6 col-lg-3">
         <div class="p-4 rounded shadow text-center d-flex flex-column h-100" style="background-color: #0d1b2a; color: #f1f1f1;">
           <i class="fas fa-binoculars fa-2x mb-3"></i>
-          <h5 id="value-four" class="fw-bold">Visssion</h5>
+          <h5 id="value-four" class="fw-bold">Vision</h5>
           <p id="value-para-four" class="small">
-            Lead the way with foresight, ensuring our brand stays ahead of time.
+            We anticipate future trends and lead the way with foresight, ensuring our brand stays ahead of time.
           </p>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<section class="management-section text-center">
+  <h2 id="management-heading" class="section-title" style="font-family: Georgia, 'Times New Roman', Times, serif;">Meet Visionaries</h2>
+  
+  <div class="team-card row align-items-center mb-4">
+    <div class="col-md-4 text-center image-side">
+      <img id="member-image1" src="../images/testimonials/testimonial1.jpg" alt="Vincent" class="split-img">
+    </div>
+    <div class="col-md-8 text-start text-side">
+      <h5 id="name1">Vincent Thomas</h5>
+      <p id="role1" class="title">Managing Director</p>
+      <p id="quote1" class="quote">"Building trust through quality and service."</p>
+    </div>
+  </div>
+
+  <div class="team-card row align-items-center mb-4">
+    <div class="col-md-4 text-center image-side">
+      <img id="member-image2" src="../images/testimonials/testimonial2.jpg" alt="Jessy" class="split-img">
+    </div>
+    <div class="col-md-8 text-start text-side">
+      <h5 id= "name2" >Jessy Vincent</h5>
+      <p id="role2" class="title">Director</p>
+      <p id="quote2" class="quote">"Shaping elegance with every design."</p>
+    </div>
+  </div>
+
+    <div class="team-card row align-items-center mb-4">
+    <div class="col-md-4 text-center image-side">
+      <img id="member-image3" src="../images/testimonials/testimonial2.jpg" alt="Jessy" class="split-img">
+    </div>
+    <div class="col-md-8 text-start text-side">
+      <h5 id= "name3" >Jessy Vincent</h5>
+      <p id="role3" class="title">Director</p>
+      <p id="quote3" class="quote">"Shaping elegance with every design."</p>
+    </div>
+  </div>
+
+    <div class="team-card row align-items-center mb-4">
+    <div class="col-md-4 text-center image-side">
+      <img id="member-image4" src="../images/testimonials/testimonial2.jpg" alt="Jessy" class="split-img">
+    </div>
+    <div class="col-md-8 text-start text-side">
+      <h5 id= "name2" >Jessy Vincent</h5>
+      <p id="role4" class="title">Director</p>
+      <p id="quote4" class="quote">"Shaping elegance with every design."</p>
+    </div>
+  </div>
+</section>
+
 
 <div id="footer-container"></div>
   <script>
