@@ -36,7 +36,7 @@ fetch("https://meaningful-horse-99e25d03c1.strapiapp.com/api/aboutpages")
 
     const videoData = content.aboutVideo?.[0];
     if (videoData && videoData.url) {
-      const videoUrl = "http://localhost:1337" + videoData.url;
+      const videoUrl = "https://meaningful-horse-99e25d03c1.strapiapp.com" + videoData.url;
       const videoSource = document.createElement("source");
       videoSource.src = videoUrl;
       videoSource.type = "video/mp4";
