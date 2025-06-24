@@ -47,7 +47,7 @@ fetch("https://meaningful-horse-99e25d03c1.strapiapp.com/api/aboutpages")
   .catch(err => console.error("Error fetching About Page data:", err));
 
 
-fetch("http://localhost:1337/api/managements?populate=*")
+fetch("https://meaningful-horse-99e25d03c1.strapiapp.com/api/managements")
   .then(res => res.json())
   .then(data => {
     const members = data.data;
@@ -61,7 +61,7 @@ fetch("http://localhost:1337/api/managements?populate=*")
       const image = member.image?.[0];
 
       const imageUrl = image?.formats?.medium?.url || image?.url;
-      const fullImageUrl = imageUrl ? `http://localhost:1337${imageUrl}` : null;
+      const fullImageUrl = imageUrl ? `https://meaningful-horse-99e25d03c1.strapiapp.com${imageUrl}` : null;
 
       const nameEl = document.getElementById(`name${i}`);
       const roleEl = document.getElementById(`role${i}`);
