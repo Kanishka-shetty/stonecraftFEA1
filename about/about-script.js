@@ -1,7 +1,7 @@
 fetch("https://meaningful-horse-99e25d03c1.strapiapp.com/api/aboutpages?populate=*")
   .then(res => res.json())
   .then(data => {
-    const content = data.data[0].attributes;
+    const content = data.data;
 
     // Text content
     document.getElementById("about-heading-one").textContent = content.headingOne || "Default Heading";
