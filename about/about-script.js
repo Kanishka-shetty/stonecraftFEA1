@@ -73,7 +73,7 @@ fetch("https://meaningful-horse-99e25d03c1.strapiapp.com/api/managements?populat
 fetch("https://meaningful-horse-99e25d03c1.strapiapp.com/api/managementheading")
   .then(res => res.json())
   .then(data => {
-    const heading = data.data[0]?.attributes?.heading; // ✅ correct way
+    const heading = data.data.heading; // ✅ correct way
 
     const headingEl = document.getElementById("management-heading");
     if (headingEl) {
