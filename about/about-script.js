@@ -28,7 +28,7 @@ fetch("https://meaningful-horse-99e25d03c1.strapiapp.com/api/aboutpages")
   })
   .catch(err => console.error("Error fetching About Page data:", err));
 
-    fetch("http://localhost:1337/api/aboutpages?populate=*")
+    fetch("https://meaningful-horse-99e25d03c1.strapiapp.com/api/aboutpages")
   .then(res => res.json())
   .then(data => {
     
