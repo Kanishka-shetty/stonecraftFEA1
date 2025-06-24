@@ -1,7 +1,7 @@
 fetch("https://meaningful-horse-99e25d03c1.strapiapp.com/api/aboutpages?populate=*")
   .then(res => res.json())
   .then(data => {
-    const content = data.data;
+    const content = data.data[0]; // ✅ Fix here
 
     // Text content
     document.getElementById("about-heading-one").textContent = content.headingOne || "Default Heading";
@@ -23,9 +23,8 @@ fetch("https://meaningful-horse-99e25d03c1.strapiapp.com/api/aboutpages?populate
     // Video
     const videoData = content.aboutVideo?.[0];
     if (videoData && videoData.url) {
-      const videoUrl = "https://meaningful-horse-99e25d03c1.strapiapp.com" + videoData.url;
       const videoSource = document.createElement("source");
-      videoSource.src = videoUrl;
+      videoSource.src = videoData.url;
       videoSource.type = "video/mp4";
       document.getElementById("about-hero-video").appendChild(videoSource);
     }
@@ -35,7 +34,7 @@ fetch("https://meaningful-horse-99e25d03c1.strapiapp.com/api/aboutpages?populate
 fetch("https://meaningful-horse-99e25d03c1.strapiapp.com/api/managements?populate=*")
   .then(res => res.json())
   .then(data => {
-    const members = data.data[0];
+    const members = data.data;
 
     members.forEach((member, index) => {
       if (!member) return; // ✅ skip if empty
