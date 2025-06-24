@@ -35,7 +35,7 @@ fetch("https://meaningful-horse-99e25d03c1.strapiapp.com/api/aboutpages?populate
 fetch("https://meaningful-horse-99e25d03c1.strapiapp.com/api/managements?populate=*")
   .then(res => res.json())
   .then(data => {
-    const members = data.data;
+    const members = data.data[0];
 
     members.forEach((member, index) => {
       if (!member) return; // ✅ skip if empty
