@@ -38,17 +38,21 @@ fetch("https://meaningful-horse-99e25d03c1.strapiapp.com/api/managements?populat
     const members = data.data;
 
     members.forEach((member, index) => {
-      if (!member || !member.attributes) return; // ✅ skip bad entries
+      if (!member) return; // ✅ skip if empty
 
       const i = index + 1;
 
-      const attrs = member.attributes;
-      const name = attrs.name;
-      const role = attrs.role;
-      const quote = attrs.quote;
-      const image = attrs.image?.data?.attributes;
+      // 👇 No need for .attributes — use directly
+      const name = member.name;
+      const role = member.role;
+      const quote = member.quote;
+      const image = member.image?.[0]; // image is an array
 
-      const imageUrl = image?.formats?.medium?.url || image?.url;
+      const imageUrl =
+        image?.formats?.medium?.url ||
+        image?.formats?.small?.url ||
+        image?.url;
+
       const fullImageUrl = imageUrl?.startsWith("http")
         ? imageUrl
         : `https://meaningful-horse-99e25d03c1.media.strapiapp.com${imageUrl}`;
