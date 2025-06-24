@@ -80,7 +80,7 @@ fetch("https://meaningful-horse-99e25d03c1.strapiapp.com/api/managements")
   .catch(err => console.error("Error fetching management data:", err));
 
 
-  fetch("http://localhost:1337/api/managementheading")
+  fetch("https://meaningful-horse-99e25d03c1.strapiapp.com/api/managementheading")
   .then(res => res.json())
   .then(data => {
     const heading = data.data.heading;
