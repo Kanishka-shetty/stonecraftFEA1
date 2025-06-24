@@ -1,5 +1,5 @@
 
-fetch("https://meaningful-horse-99e25d03c1.strapiapp.com/api/heroabouts/footers/aboutpages")
+fetch("https://meaningful-horse-99e25d03c1.strapiapp.com/api/aboutpages")
   .then(res => res.json())
   .then(data => {
     const content = data.data[0]; // ✅ Add this line
