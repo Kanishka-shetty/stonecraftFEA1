@@ -38,6 +38,8 @@ fetch("https://meaningful-horse-99e25d03c1.strapiapp.com/api/managements?populat
     const members = data.data;
 
     members.forEach((member, index) => {
+      if (!member || !member.attributes) return; // ✅ skip bad entries
+
       const i = index + 1;
 
       const attrs = member.attributes;
