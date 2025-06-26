@@ -16,17 +16,24 @@
   <!-- Hero section placeholder -->
   <div id="hero-container"></div>
   <!-- Script to load hero and about.html -->
-  <script>fetch("hero/hero.html")
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById("hero-container").innerHTML = data;
+  <script>
+  fetch("hero/hero.html")
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById("hero-container").innerHTML = data;
 
-        const script = document.createElement("script");
-        script.src = "hero/heroabout-script.js";
-        document.body.appendChild(script);
-      })
-      .catch(err => console.error("Error loading hero section:", err));
-  </script>
+      // Load heroabout-script.js
+      const script1 = document.createElement("script");
+      script1.src = "hero/heroabout-script.js";
+      document.body.appendChild(script1);
+
+      // Load hero-script.js
+      const script2 = document.createElement("script");
+      script2.src = "hero/hero-script.js";
+      document.body.appendChild(script2);
+    })
+    .catch(err => console.error("Error loading hero section:", err));
+</script>
 
   <!-- Script to load products.html -->
 <section id="products-section">

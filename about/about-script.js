@@ -38,7 +38,6 @@ fetch("https://meaningful-horse-99e25d03c1.strapiapp.com/api/managements?populat
 
     members.forEach((member, index) => {
       if (!member) return; // ✅ skip if empty
-
       const i = index + 1;
 
       // 👇 No need for .attributes — use directly
