@@ -13,10 +13,10 @@ fetch("https://meaningful-horse-99e25d03c1.strapiapp.com/api/heroes?populate=*")
     document.getElementById("hero-tagline").textContent = tagline || "Default Hero Tagline";
 
     const imageUrl = logoImage.url;
-    const heroImageUrl = "https://meaningful-horse-99e25d03c1.strapiapp.com/api/heroes?populate=*" + heroImage.url;
-    const heroimage1 = "https://meaningful-horse-99e25d03c1.strapiapp.com/api/heroes?populate=*" + heroImage1.url;
-    const heroimage2 = "https://meaningful-horse-99e25d03c1.strapiapp.com/api/heroes?populate=*" + heroImage2.url;
-    const heroimage3 = "https://meaningful-horse-99e25d03c1.strapiapp.com/api/heroes?populate=*" + heroImage3.url;
+    const heroImageUrl = heroImage.url;
+    const heroimage1 = heroImage1.url;
+    const heroimage2 =  heroImage2.url;
+    const heroimage3 = heroImage3.url;
 
     // Set it into the <img> tag
     document.getElementById("logo-img").src = imageUrl;
