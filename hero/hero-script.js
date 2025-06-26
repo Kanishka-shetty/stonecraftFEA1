@@ -12,7 +12,7 @@ fetch("https://meaningful-horse-99e25d03c1.strapiapp.com/api/heroes?populate=*")
     document.getElementById("hero-heading").textContent = heading || "Default Hero Heading";
     document.getElementById("hero-tagline").textContent = tagline || "Default Hero Tagline";
 
-    const imageUrl = "https://meaningful-horse-99e25d03c1.strapiapp.com/api/heroes?populate=*" + logoImage.url;
+    const imageUrl = logoImage.url;
     const heroImageUrl = "https://meaningful-horse-99e25d03c1.strapiapp.com/api/heroes?populate=*" + heroImage.url;
     const heroimage1 = "https://meaningful-horse-99e25d03c1.strapiapp.com/api/heroes?populate=*" + heroImage1.url;
     const heroimage2 = "https://meaningful-horse-99e25d03c1.strapiapp.com/api/heroes?populate=*" + heroImage2.url;
