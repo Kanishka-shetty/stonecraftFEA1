@@ -71,21 +71,288 @@
         <h6 class="mt-0">All Categories</h6>
     </section>
 
-<!-- Tile Categories -->
+    <!-- Tile Categories -->
     <div class="container mb-4">
-        <div class="d-flex justify-content-center justify-content-md-center gap-1 overflow-auto px-1"
+        <div id="tile-category-buttons"
+            class="d-flex justify-content-center justify-content-md-center gap-1 overflow-auto px-1"
             style="scrollbar-width: none; -ms-overflow-style: none; white-space: nowrap;">
+            <!-- Dynamic category buttons will be injected here by JS -->
+        </div>
+    </div>
 
-            <!-- Wall -->
-            <div id="tile-category-buttons"
-                class="d-flex justify-content-center justify-content-md-center gap-1 overflow-auto px-1"
-                style="scrollbar-width: none; -ms-overflow-style: none; white-space: nowrap;">
-                <!-- Dynamic category buttons will be injected here by JS -->
+    <!-- 🔽 WALL TILES SECTION 🔽 -->
+    <section id="wall-tiles" class="py-4 bg-light my-4" style="border-top: 2px dashed #ccc;">
+        <div class="container">
+            <h4 class="text-center fw-bold mb-4">WALL TILES</h4>
+
+            <!-- Tile Cards Will Be Injected Here -->
+            <div id="wall-tiles-container" class="row g-4">
+                <!-- JS will populate tile cards here -->
+            </div>
+
+            <!-- View More / View Less Buttons -->
+            <div class="text-center mt-4">
+                <button id="viewMoreWall" class="btn btn-dark btn-sm d-none">View More</button>
+                <button id="viewLessWall" class="btn btn-outline-dark btn-sm d-none">View Less</button>
+            </div>
+        </div>
+    </section>
+         <!-- 🔽 FLOOOR TILES SECTION 🔽 -->
+        <section id="floor-tiles" class="py-4 bg-light my-4" style="border-top: 2px dashed #ccc;">
+            <div class="container">
+                <h4 class="text-center fw-bold mb-4">FLOOR TILES</h4>
+                <div id="floor-tiles-container" class="row g-4">
+                    <!-- Tile cards will be injected here -->
+                </div>
+            </div>
+            <!-- View More / View Less Buttons -->
+            <div class="text-center mt-4">
+                <button id="viewMoreFloor" class="btn btn-dark btn-sm d-none">View More</button>
+                <button id="viewLessFloor" class="btn btn-outline-dark btn-sm d-none">View Less</button>
+            </div>
+        </section>
+     <!-- 🔽 BATHROOM TILES SECTION 🔽 -->
+        <section id="bathroom-tiles" class="py-4 bg-light my-4" style="border-top: 2px dashed #ccc;">
+            <div class="container">
+                <h4 class="text-center fw-bold mb-4">BATHROOM TILES</h4>
+                <div id="bathroom-tiles-container" class="row g-4">
+                    <!-- Tile cards will be injected here -->
+                </div>
+            </div>
+            <!-- View More / View Less Buttons -->
+            <div class="text-center mt-4">
+                <button id="viewMoreBathroom" class="btn btn-dark btn-sm d-none">View More</button>
+                <button id="viewLessBathroom" class="btn btn-outline-dark btn-sm d-none">View Less</button>
+            </div>
+        </section>
+
+        <!-- 🔽 KITCHEN TILES SECTION 🔽 -->
+        <section id="kitchen-tiles" class="py-4 bg-light my-4" style="border-top: 2px dashed #ccc;">
+            <div class="container">
+                <h4 class="text-center fw-bold mb-4">KITCHEN TILES</h4>
+                <div id="kitchen-tiles-container" class="row g-4"></div>
+            </div>
+            <div class="text-center mt-4">
+                <button id="viewMoreKitchen" class="btn btn-dark btn-sm d-none">View More</button>
+                <button id="viewLessKitchen" class="btn btn-outline-dark btn-sm d-none">View Less</button>
+            </div>
+        </section>
+
+        <!-- 🔽 GENERAL TILES SECTION 🔽 -->
+        <section id="general-tiles" class="py-4 bg-light my-4" style="border-top: 2px dashed #ccc;">
+            <div class="container">
+                <h4 class="text-center fw-bold mb-4">GENERAL TILES</h4>
+                <div id="general-tiles-container" class="row g-4"></div>
+            </div>
+            <div class="text-center mt-4">
+                <button id="viewMoreGeneral" class="btn btn-dark btn-sm d-none">View More</button>
+                <button id="viewLessGeneral" class="btn btn-outline-dark btn-sm d-none">View Less</button>
+            </div>
+        </section>
+
+
+    <!-- 🟦 Quick View Modal -->
+    <div class="modal fade" id="quickViewModal" tabindex="-1" aria-labelledby="quickViewModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="quickViewModalLabel">Tile Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body text-center">
+                    <img id="modalTileImg" src="" class="img-fluid mb-3"
+                        style="width: 100%; height: 300px; object-fit: contain; background-color: #f8f9fa; border: 1px solid #dee2e6;"
+                        alt="Tile Image">
+                    <h5 id="modalTileTitle" class="fw-semibold"></h5>
+                    <p id="modalTilePrice" class="fw-bold text-muted mb-3"></p>
+
+                    <!-- Color Circles -->
+                    <div id="colorVariants" class="d-flex justify-content-center gap-3 mb-3"></div>
+                </div>
             </div>
         </div>
     </div>
 
     <script src="tileheading-script.js"></script>
+
+
+   <!-- SCRIPT TO LOAD TILES FROM STRAPI API -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const tilesPerClick = 4;
+
+            // Containers
+            const wallContainer = document.getElementById("wall-tiles-container");
+            const floorContainer = document.getElementById("floor-tiles-container");
+            const bathContainer = document.getElementById("bathroom-tiles-container");
+            const kitchenContainer = document.getElementById("kitchen-tiles-container");
+            const generalContainer = document.getElementById("general-tiles-container");
+
+            // Buttons
+            const viewMoreWall = document.getElementById("viewMoreWall");
+            const viewLessWall = document.getElementById("viewLessWall");
+
+            const viewMoreFloor = document.getElementById("viewMoreFloor");
+            const viewLessFloor = document.getElementById("viewLessFloor");
+
+            const viewMoreBath = document.getElementById("viewMoreBathroom");
+            const viewLessBath = document.getElementById("viewLessBathroom");
+
+            const viewMoreKitchen = document.getElementById("viewMoreKitchen");
+            const viewLessKitchen = document.getElementById("viewLessKitchen");
+
+            const viewMoreGeneral = document.getElementById("viewMoreGeneral");
+            const viewLessGeneral = document.getElementById("viewLessGeneral");
+
+            // Data storage
+            const allWallTiles = [], allFloorTiles = [], allBathroomTiles = [], allKitchenTiles = [], allGeneralTiles = [];
+            let countWall = 0, countFloor = 0, countBath = 0, countKitchen = 0, countGeneral = 0;
+
+            // Reusable card generator
+            function createTileCard(container, title, price, imageUrl, colorsArray) {
+                const col = document.createElement("div");
+                col.className = "col-6 col-md-3";
+
+                col.innerHTML = `
+            <div class="card h-100 shadow-sm border-0">
+                <img src="${imageUrl}" class="card-img-top" alt="${title}" style="height: 180px; object-fit: cover;">
+                <h6 class="bg-dark text-white py-2 fw-semibold text-center m-0">${title}</h6>
+                <div class="card-body text-center px-2">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="fw-bold text-dark">₹${price}</span>
+                        <button class="btn btn-outline-dark btn-sm view-btn" data-bs-toggle="modal"
+                                data-bs-target="#quickViewModal"
+                                data-title="${title}" data-price="${price}"
+                                data-colors='${JSON.stringify(colorsArray)}'>
+                            View
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+                container.appendChild(col);
+            }
+
+            // Reusable tile renderer
+            function renderTiles(container, dataArray, countVar, viewMoreBtn, viewLessBtn) {
+                const next = dataArray.slice(countVar.value, countVar.value + tilesPerClick);
+                next.forEach(tile => {
+                    createTileCard(container, tile.title, tile.price, tile.image, tile.colorsArray);
+                });
+                countVar.value += next.length;
+
+                if (countVar.value >= dataArray.length) {
+                    viewMoreBtn.classList.add("d-none");
+                    viewLessBtn.classList.remove("d-none");
+                } else {
+                    viewMoreBtn.classList.remove("d-none");
+                    viewLessBtn.classList.add("d-none");
+                }
+            }
+
+            // Fetch and initialize
+            fetch("http://localhost:1337/api/tiles?populate=*&pagination[pageSize]=100")
+                .then(res => res.json())
+                .then(data => {
+                    const tiles = data.data;
+
+                    tiles.forEach(tile => {
+                        const title = tile.title;
+                        const price = tile.price;
+                        const image = tile.image?.url ? `http://localhost:1337${tile.image.url}` : '';
+                        const category = tile.tilecategory?.name;
+
+                        const colorsRaw = tile.colors || [];
+                        const colorsArray = [image, ...colorsRaw.map(img => `http://localhost:1337${img.url}`)];
+
+                        const tileData = { title, price, image, colorsArray };
+
+                        if (category === "Wall") allWallTiles.push(tileData);
+                        else if (category === "Floor") allFloorTiles.push(tileData);
+                        else if (category === "Bathroom") allBathroomTiles.push(tileData);
+                        else if (category === "Kitchen") allKitchenTiles.push(tileData);
+                        else if (category === "General") allGeneralTiles.push(tileData);
+                    });
+
+                    // Show first 4 per section
+                    renderTiles(wallContainer, allWallTiles, { value: countWall }, viewMoreWall, viewLessWall);
+                    renderTiles(floorContainer, allFloorTiles, { value: countFloor }, viewMoreFloor, viewLessFloor);
+                    renderTiles(bathContainer, allBathroomTiles, { value: countBath }, viewMoreBath, viewLessBath);
+                    renderTiles(kitchenContainer, allKitchenTiles, { value: countKitchen }, viewMoreKitchen, viewLessKitchen);
+                    renderTiles(generalContainer, allGeneralTiles, { value: countGeneral }, viewMoreGeneral, viewLessGeneral);
+
+                    // Handle hiding if entries are <= tilesPerClick
+                    if (allWallTiles.length <= tilesPerClick) {
+                        viewMoreWall.classList.add("d-none");
+                        viewLessWall.classList.add("d-none");
+                    }
+
+                    if (allFloorTiles.length <= tilesPerClick) {
+                        viewMoreFloor.classList.add("d-none");
+                        viewLessFloor.classList.add("d-none");
+                    }
+
+                    if (allBathroomTiles.length <= tilesPerClick) {
+                        viewMoreBath.classList.add("d-none");
+                        viewLessBath.classList.add("d-none");
+                    }
+
+                    if (allKitchenTiles.length <= tilesPerClick) {
+                        viewMoreKitchen.classList.add("d-none");
+                        viewLessKitchen.classList.add("d-none");
+                    }
+
+                    if (allGeneralTiles.length <= tilesPerClick) {
+                        viewMoreGeneral.classList.add("d-none");
+                        viewLessGeneral.classList.add("d-none");
+                    }
+
+                    // Update counter vars
+                    countWall = { value: Math.min(tilesPerClick, allWallTiles.length) };
+                    countFloor = { value: Math.min(tilesPerClick, allFloorTiles.length) };
+                    countBath = { value: Math.min(tilesPerClick, allBathroomTiles.length) };
+                    countKitchen = { value: Math.min(tilesPerClick, allKitchenTiles.length) };
+                    countGeneral = { value: Math.min(tilesPerClick, allGeneralTiles.length) };
+                });
+
+            // Event Listeners
+            viewMoreWall.addEventListener("click", () => renderTiles(wallContainer, allWallTiles, countWall, viewMoreWall, viewLessWall));
+            viewLessWall.addEventListener("click", () => {
+                wallContainer.innerHTML = "";
+                countWall.value = 0;
+                renderTiles(wallContainer, allWallTiles, countWall, viewMoreWall, viewLessWall);
+            });
+
+            viewMoreFloor.addEventListener("click", () => renderTiles(floorContainer, allFloorTiles, countFloor, viewMoreFloor, viewLessFloor));
+            viewLessFloor.addEventListener("click", () => {
+                floorContainer.innerHTML = "";
+                countFloor.value = 0;
+                renderTiles(floorContainer, allFloorTiles, countFloor, viewMoreFloor, viewLessFloor);
+            });
+
+            viewMoreBath.addEventListener("click", () => renderTiles(bathContainer, allBathroomTiles, countBath, viewMoreBath, viewLessBath));
+            viewLessBath.addEventListener("click", () => {
+                bathContainer.innerHTML = "";
+                countBath.value = 0;
+                renderTiles(bathContainer, allBathroomTiles, countBath, viewMoreBath, viewLessBath);
+            });
+
+            viewMoreKitchen.addEventListener("click", () => renderTiles(kitchenContainer, allKitchenTiles, countKitchen, viewMoreKitchen, viewLessKitchen));
+            viewLessKitchen.addEventListener("click", () => {
+                kitchenContainer.innerHTML = "";
+                countKitchen.value = 0;
+                renderTiles(kitchenContainer, allKitchenTiles, countKitchen, viewMoreKitchen, viewLessKitchen);
+            });
+
+            viewMoreGeneral.addEventListener("click", () => renderTiles(generalContainer, allGeneralTiles, countGeneral, viewMoreGeneral, viewLessGeneral));
+            viewLessGeneral.addEventListener("click", () => {
+                generalContainer.innerHTML = "";
+                countGeneral.value = 0;
+                renderTiles(generalContainer, allGeneralTiles, countGeneral, viewMoreGeneral, viewLessGeneral);
+            });
+        });
+    </script>
 
     <div id="footer-container"></div>
     <script>
@@ -100,6 +367,8 @@
             })
             .catch(err => console.error("Error loading footer:", err));
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>
