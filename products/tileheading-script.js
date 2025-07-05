@@ -19,7 +19,6 @@ fetch('https://meaningful-horse-99e25d03c1.strapiapp.com/api/tileheading?populat
   })
   .catch(err => console.error("Error fetching granite heading or image:", err));
 
-
 //  SCRIPT TO LOAD TILE CATEGORIES AT THE TOP
 fetch("https://meaningful-horse-99e25d03c1.strapiapp.com/api/tilecategories?populate=*")
   .then(res => res.json())
@@ -63,113 +62,6 @@ fetch("https://meaningful-horse-99e25d03c1.strapiapp.com/api/tilecategories?popu
     console.error("Error fetching tile categories:", error);
   });
 
-//  SCRIPT TO LOAD IMAGES FROM THE STRAPI FOR PRODUCT GRID
-document.addEventListener("DOMContentLoaded", function () {
-  const container = document.getElementById("wall-tiles-container");
-
-  const viewMoreBtn = document.getElementById("viewMoreWall");
-  const viewLessBtn = document.getElementById("viewLessWall");
-
-  const allWallTiles = [];
-  let currentVisibleCount = 0;
-  const tilesPerClick = 4;
-
-  function createTileCard(title, price, imageUrl, colorsArray) {
-    const col = document.createElement("div");
-    col.className = "col-6 col-md-3";
-
-    col.innerHTML = `
-        <div class="card h-100 shadow-sm border-0">
-            <img src="${imageUrl}" class="card-img-top" alt="${title}" style="height: 180px; object-fit: cover;">
-            <h6 class="bg-dark text-white py-2 fw-semibold text-center m-0">${title}</h6>
-            <div class="card-body text-center px-2">
-                <div class="d-flex justify-content-between align-items-center">
-                    <span class="fw-bold text-dark">₹${price}</span>
-                    <button class="btn btn-outline-dark btn-sm view-btn" data-bs-toggle="modal"
-                            data-bs-target="#quickViewModal"
-                            data-title="${title}" data-price="${price}"
-                            data-colors='${JSON.stringify(colorsArray)}'>
-                        View
-                    </button>
-                </div>
-            </div>
-        </div>
-      `;
-    container.appendChild(col);
-  }
-
-  function renderTiles(count) {
-    const nextTiles = allWallTiles.slice(currentVisibleCount, currentVisibleCount + count);
-    nextTiles.forEach(tile => {
-      createTileCard(tile.title, tile.price, tile.image, tile.colorsArray);
-    });
-    currentVisibleCount += nextTiles.length;
-
-    if (currentVisibleCount >= allWallTiles.length) {
-      viewMoreBtn.classList.add("d-none");
-      viewLessBtn.classList.remove("d-none");
-    } else {
-      viewMoreBtn.classList.remove("d-none");
-      viewLessBtn.classList.add("d-none");
-    }
-  }
-
-  fetch("https://meaningful-horse-99e25d03c1.strapiapp.com/api/tiles?populate=*")
-    .then(response => response.json())
-    .then(data => {
-      const tiles = data.data;
-
-      tiles.forEach(tile => {
-        const title = tile.title;
-        const price = tile.price;
-
-        const image = tile.image?.url
-          ? tile.image.url.startsWith("http")
-            ? tile.image.url
-            : `https://meaningful-horse-99e25d03c1.media.strapiapp.com${tile.image.url}`
-          : "";
-
-        const category = tile.tilecategory?.name;
-
-        const colorsRaw = tile.colors || [];
-        const colorsArray = [image, ...colorsRaw.map(c =>
-          c.url.startsWith("http")
-            ? c.url
-            : `https://meaningful-horse-99e25d03c1.media.strapiapp.com${c.url}`
-        )];
-
-        if (category && category.toLowerCase() === "wall") {
-          allWallTiles.push({
-            title,
-            price,
-            image,
-            colorsArray
-          });
-        }
-      });
-
-      renderTiles(tilesPerClick);
-
-      if (allWallTiles.length <= tilesPerClick) {
-        viewMoreBtn.classList.add("d-none");
-        viewLessBtn.classList.add("d-none");
-      } else {
-        viewMoreBtn.classList.remove("d-none");
-      }
-    })
-    .catch(err => console.error("Error fetching tiles:", err));
-
-  viewMoreBtn.addEventListener("click", function () {
-    renderTiles(tilesPerClick);
-  });
-
-  viewLessBtn.addEventListener("click", function () {
-    container.innerHTML = "";
-    currentVisibleCount = 0;
-    renderTiles(tilesPerClick);
-  });
-});
-
 // SCRIPT FOR VIEW BUTTON UNDER EACH PRODUCT GRID
 document.addEventListener("click", function (e) {
   if (e.target && e.target.classList.contains("view-btn")) {
@@ -203,3 +95,128 @@ document.addEventListener("click", function (e) {
     });
   }
 });
+
+// SCRIPT TO LOAD TILES FROM STRAPI API
+document.addEventListener("DOMContentLoaded", function () {
+    const tilesPerClick = 4;
+
+    // Config for all categories
+    const categories = [
+      { name: "Wall", id: "wall" },
+      { name: "Floor", id: "floor" },
+      { name: "Bathroom", id: "bathroom" },
+      { name: "Kitchen", id: "kitchen" },
+      { name: "General", id: "general" }
+    ];
+
+    const tileDataMap = {};
+
+    // Card Generator
+    function createTileCard(title, price, imageUrl, colorsArray) {
+      const col = document.createElement("div");
+      col.className = "col-6 col-md-3";
+      col.innerHTML = `
+        <div class="card h-100 shadow-sm border-0">
+          <img src="${imageUrl}" class="card-img-top" alt="${title}" style="height: 180px; object-fit: cover;">
+          <h6 class="bg-dark text-white py-2 fw-semibold text-center m-0">${title}</h6>
+          <div class="card-body text-center px-2">
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="fw-bold text-dark">₹${price}</span>
+              <button class="btn btn-outline-dark btn-sm view-btn" data-bs-toggle="modal"
+                data-bs-target="#quickViewModal"
+                data-title="${title}" data-price="${price}"
+                data-colors='${JSON.stringify(colorsArray)}'>
+                View
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+      return col;
+    }
+
+    // Renderer
+    function renderTiles(catId) {
+      const { tiles, count, container, viewMoreBtn, viewLessBtn } = tileDataMap[catId];
+      const next = tiles.slice(count.value, count.value + tilesPerClick);
+      next.forEach(tile => {
+        const card = createTileCard(tile.title, tile.price, tile.image, tile.colorsArray);
+        container.appendChild(card);
+      });
+      count.value += next.length;
+
+      if (count.value >= tiles.length) {
+        viewMoreBtn.classList.add("d-none");
+        viewLessBtn.classList.remove("d-none");
+      } else {
+        viewMoreBtn.classList.remove("d-none");
+        viewLessBtn.classList.add("d-none");
+      }
+    }
+
+    // Fetch tiles
+    fetch("https://meaningful-horse-99e25d03c1.strapiapp.com/api/tiles?populate=*")
+      .then(res => res.json())
+      .then(data => {
+        const tiles = data.data;
+
+        // Init data storage per category
+        categories.forEach(({ name, id }) => {
+          tileDataMap[id] = {
+            tiles: [],
+            count: { value: 0 },
+            container: document.getElementById(`${id}-tiles-container`),
+            viewMoreBtn: document.getElementById(`viewMore${name}`),
+            viewLessBtn: document.getElementById(`viewLess${name}`)
+          };
+        });
+
+        // Distribute tiles into categories
+        tiles.forEach(tile => {
+          const title = tile.title;
+          const price = tile.price;
+          const category = tile.tilecategory?.name?.toLowerCase();
+          const image = tile.image?.url
+            ? tile.image.url.startsWith("http")
+              ? tile.image.url
+              : `https://meaningful-horse-99e25d03c1.media.strapiapp.com${tile.image.url}`
+            : "";
+          const colorsRaw = tile.colors || [];
+          const colorsArray = [image, ...colorsRaw.map(c =>
+            c.url.startsWith("http")
+              ? c.url
+              : `https://meaningful-horse-99e25d03c1.media.strapiapp.com${c.url}`
+          )];
+
+          categories.forEach(({ name, id }) => {
+            if (category === name.toLowerCase()) {
+              tileDataMap[id].tiles.push({ title, price, image, colorsArray });
+            }
+          });
+        });
+
+        // Initial render + button setup
+        categories.forEach(({ name, id }) => {
+          const { tiles, viewMoreBtn, viewLessBtn } = tileDataMap[id];
+          if (tiles.length > 0) {
+            renderTiles(id);
+
+            if (tiles.length <= tilesPerClick) {
+              viewMoreBtn.classList.add("d-none");
+              viewLessBtn.classList.add("d-none");
+            } else {
+              viewMoreBtn.classList.remove("d-none");
+              viewLessBtn.classList.add("d-none");
+            }
+
+            viewMoreBtn.addEventListener("click", () => renderTiles(id));
+            viewLessBtn.addEventListener("click", () => {
+              tileDataMap[id].container.innerHTML = "";
+              tileDataMap[id].count.value = 0;
+              renderTiles(id);
+            });
+          }
+        });
+      })
+      .catch(err => console.error("Error fetching tiles:", err));
+  });
