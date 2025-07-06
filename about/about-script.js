@@ -1,3 +1,16 @@
+fetch("https://meaningful-horse-99e25d03c1.strapiapp.com/api/heroes?populate=*")
+  .then(res => res.json())
+  .then(data => {
+    const logoImage = data.data[0].logo[0];
+    
+    const imageUrl = logoImage.url;
+
+    // Set it into the <img> tag
+    document.getElementById("logo-img").src = imageUrl;
+  })
+  .catch(error => console.error("Error loading logo image:", error));
+
+
 fetch("https://meaningful-horse-99e25d03c1.strapiapp.com/api/aboutpages?populate=*")
   .then(res => res.json())
   .then(data => {
