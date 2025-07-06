@@ -4,7 +4,7 @@ fetch("https://meaningful-horse-99e25d03c1.strapiapp.com/api/heroes?populate=*")
   .then(res => res.json())
   .then(data => {
     const logoImage = data.data[0].logo[0];
-    
+
     const imageUrl = logoImage.url;
 
     // Set it into the <img> tag
@@ -147,37 +147,37 @@ function updateHeartIcon(title, colorImg) {
   const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
   const exists = favorites.some(f => f.title === title && f.colorImg === colorImg);
 
-if (exists) {
-  icon.classList.remove("fa-regular");
-  icon.classList.add("fa-solid");
-  icon.style.color = "red"; // ❤️ red when favorited
-} else {
-  icon.classList.remove("fa-solid");
-  icon.classList.add("fa-regular");
-  icon.style.color = "black"; // outline black when not favorited
-}
+  if (exists) {
+    icon.classList.remove("fa-regular");
+    icon.classList.add("fa-solid");
+    icon.style.color = "red"; // ❤️ red when favorited
+  } else {
+    icon.classList.remove("fa-solid");
+    icon.classList.add("fa-regular");
+    icon.style.color = "black"; // outline black when not favorited
+  }
 }
 
 // SCRIPT TO LOAD TILES FROM STRAPI API
 document.addEventListener("DOMContentLoaded", function () {
-    const tilesPerClick = 4;
+  const tilesPerClick = 4;
 
-    // Config for all categories
-    const categories = [
-      { name: "Wall", id: "wall" },
-      { name: "Floor", id: "floor" },
-      { name: "Bathroom", id: "bathroom" },
-      { name: "Kitchen", id: "kitchen" },
-      { name: "General", id: "general" }
-    ];
+  // Config for all categories
+  const categories = [
+    { name: "Wall", id: "wall" },
+    { name: "Floor", id: "floor" },
+    { name: "Bathroom", id: "bathroom" },
+    { name: "Kitchen", id: "kitchen" },
+    { name: "General", id: "general" }
+  ];
 
-    const tileDataMap = {};
+  const tileDataMap = {};
 
-    // Card Generator
-    function createTileCard(title, price, imageUrl, colorsArray) {
-      const col = document.createElement("div");
-      col.className = "col-6 col-md-3";
-      col.innerHTML = `
+  // Card Generator
+  function createTileCard(title, price, imageUrl, colorsArray) {
+    const col = document.createElement("div");
+    col.className = "col-6 col-md-3";
+    col.innerHTML = `
         <div class="card h-100 shadow-sm border-0">
           <img src="${imageUrl}" class="card-img-top" alt="${title}" style="height: 180px; object-fit: cover;">
           <h6 class="bg-dark text-white py-2 fw-semibold text-center m-0">${title}</h6>
@@ -194,94 +194,94 @@ document.addEventListener("DOMContentLoaded", function () {
           </div>
         </div>
       `;
-      return col;
-    }
+    return col;
+  }
 
-    // Renderer
-    function renderTiles(catId) {
-      const { tiles, count, container, viewMoreBtn, viewLessBtn } = tileDataMap[catId];
-      const next = tiles.slice(count.value, count.value + tilesPerClick);
-      next.forEach(tile => {
-        const card = createTileCard(tile.title, tile.price, tile.image, tile.colorsArray);
-        container.appendChild(card);
+  // Renderer
+  function renderTiles(catId) {
+    const { tiles, count, container, viewMoreBtn, viewLessBtn } = tileDataMap[catId];
+    const next = tiles.slice(count.value, count.value + tilesPerClick);
+    next.forEach(tile => {
+      const card = createTileCard(tile.title, tile.price, tile.image, tile.colorsArray);
+      container.appendChild(card);
+    });
+    count.value += next.length;
+
+    if (count.value >= tiles.length) {
+      viewMoreBtn.classList.add("d-none");
+      viewLessBtn.classList.remove("d-none");
+    } else {
+      viewMoreBtn.classList.remove("d-none");
+      viewLessBtn.classList.add("d-none");
+    }
+  }
+
+  // Fetch tiles
+  fetch("https://meaningful-horse-99e25d03c1.strapiapp.com/api/tiles?populate=*")
+    .then(res => res.json())
+    .then(data => {
+      const tiles = data.data;
+
+      // Init data storage per category
+      categories.forEach(({ name, id }) => {
+        tileDataMap[id] = {
+          tiles: [],
+          count: { value: 0 },
+          container: document.getElementById(`${id}-tiles-container`),
+          viewMoreBtn: document.getElementById(`viewMore${name}`),
+          viewLessBtn: document.getElementById(`viewLess${name}`)
+        };
       });
-      count.value += next.length;
 
-      if (count.value >= tiles.length) {
-        viewMoreBtn.classList.add("d-none");
-        viewLessBtn.classList.remove("d-none");
-      } else {
-        viewMoreBtn.classList.remove("d-none");
-        viewLessBtn.classList.add("d-none");
-      }
-    }
+      // Distribute tiles into categories
+      tiles.forEach(tile => {
+        const title = tile.title;
+        const price = tile.price;
+        const category = tile.tilecategory?.name?.toLowerCase();
+        const image = tile.image?.url
+          ? tile.image.url.startsWith("http")
+            ? tile.image.url
+            : `https://meaningful-horse-99e25d03c1.media.strapiapp.com${tile.image.url}`
+          : "";
+        const colorsRaw = tile.colors || [];
+        const colorsArray = [image, ...colorsRaw.map(c =>
+          c.url.startsWith("http")
+            ? c.url
+            : `https://meaningful-horse-99e25d03c1.media.strapiapp.com${c.url}`
+        )];
 
-    // Fetch tiles
-    fetch("https://meaningful-horse-99e25d03c1.strapiapp.com/api/tiles?populate=*")
-      .then(res => res.json())
-      .then(data => {
-        const tiles = data.data;
-
-        // Init data storage per category
         categories.forEach(({ name, id }) => {
-          tileDataMap[id] = {
-            tiles: [],
-            count: { value: 0 },
-            container: document.getElementById(`${id}-tiles-container`),
-            viewMoreBtn: document.getElementById(`viewMore${name}`),
-            viewLessBtn: document.getElementById(`viewLess${name}`)
-          };
-        });
-
-        // Distribute tiles into categories
-        tiles.forEach(tile => {
-          const title = tile.title;
-          const price = tile.price;
-          const category = tile.tilecategory?.name?.toLowerCase();
-          const image = tile.image?.url
-            ? tile.image.url.startsWith("http")
-              ? tile.image.url
-              : `https://meaningful-horse-99e25d03c1.media.strapiapp.com${tile.image.url}`
-            : "";
-          const colorsRaw = tile.colors || [];
-          const colorsArray = [image, ...colorsRaw.map(c =>
-            c.url.startsWith("http")
-              ? c.url
-              : `https://meaningful-horse-99e25d03c1.media.strapiapp.com${c.url}`
-          )];
-
-          categories.forEach(({ name, id }) => {
-            if (category === name.toLowerCase()) {
-              tileDataMap[id].tiles.push({ title, price, image, colorsArray });
-            }
-          });
-        });
-
-        // Initial render + button setup
-        categories.forEach(({ name, id }) => {
-          const { tiles, viewMoreBtn, viewLessBtn } = tileDataMap[id];
-          if (tiles.length > 0) {
-            renderTiles(id);
-
-            if (tiles.length <= tilesPerClick) {
-              viewMoreBtn.classList.add("d-none");
-              viewLessBtn.classList.add("d-none");
-            } else {
-              viewMoreBtn.classList.remove("d-none");
-              viewLessBtn.classList.add("d-none");
-            }
-
-            viewMoreBtn.addEventListener("click", () => renderTiles(id));
-            viewLessBtn.addEventListener("click", () => {
-              tileDataMap[id].container.innerHTML = "";
-              tileDataMap[id].count.value = 0;
-              renderTiles(id);
-            });
+          if (category === name.toLowerCase()) {
+            tileDataMap[id].tiles.push({ title, price, image, colorsArray });
           }
         });
-      })
-      .catch(err => console.error("Error fetching tiles:", err));
-  });
+      });
+
+      // Initial render + button setup
+      categories.forEach(({ name, id }) => {
+        const { tiles, viewMoreBtn, viewLessBtn } = tileDataMap[id];
+        if (tiles.length > 0) {
+          renderTiles(id);
+
+          if (tiles.length <= tilesPerClick) {
+            viewMoreBtn.classList.add("d-none");
+            viewLessBtn.classList.add("d-none");
+          } else {
+            viewMoreBtn.classList.remove("d-none");
+            viewLessBtn.classList.add("d-none");
+          }
+
+          viewMoreBtn.addEventListener("click", () => renderTiles(id));
+          viewLessBtn.addEventListener("click", () => {
+            tileDataMap[id].container.innerHTML = "";
+            tileDataMap[id].count.value = 0;
+            renderTiles(id);
+          });
+        }
+      });
+    })
+    .catch(err => console.error("Error fetching tiles:", err));
+});
 
 
 

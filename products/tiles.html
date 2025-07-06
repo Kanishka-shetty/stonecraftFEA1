@@ -44,6 +44,16 @@
     #scrollToTopBtn.animate {
         animation: bounce 1s ease-in-out infinite;
     }
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+#openFavorites {
+  animation: heartbeat 1.2s infinite ease-in-out;
+  color: rgb(18, 110, 209);
+}
 </style>
 
 <body>
@@ -81,16 +91,21 @@
 
     <section class="bg-secondary-subtle py-4">
         <div class="container">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb mb-0">
-                    <li class="breadcrumb-item">
-                        <a href="../index.html" class="text-decoration-none text-dark">
-                            <i class="fas fa-home me-1"></i> Home >
-                        </a>
-                    </li>
-                    <li class="breadcrumb-item active text-dark" aria-current="page">Tiles</li>
-                </ol>
-            </nav>
+            <div class="d-flex justify-content-between align-items-center">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item">
+                            <a href="../index.html" class="text-decoration-none text-dark">
+                                <i class="fas fa-home me-1"></i> Home >
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item active text-dark" aria-current="page">Tiles</li>
+                    </ol>
+                </nav>
+                <!-- ❤️ Favorites Icon -->
+                <i id="openFavorites" class="fa-solid fa-heart fs-4 ms-3" style="cursor: pointer;"
+                    title="View Favorites"></i>
+            </div>
         </div>
     </section>
 
@@ -203,13 +218,25 @@
             </div>
         </div>
     </div>
+
+<!-- 🧡 FAVORITES SECTION -->
+<section id="favorites-section" class="container my-4" style="display: none;">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h3 class="mb-0">Your Favorites</h3>
+    <button id="closeFavorites" class="btn btn-sm btn-outline-dark">Close</button>
+  </div>
+  <div id="favorites-container" class="row g-3">
+    <!-- Favorite cards will be injected here -->
+  </div>
+</section>
+
     <script src="tileheading-script.js"></script>
 
     <button id="scrollToTopBtn" class="btn btn-dark rounded-circle shadow"
         style="position: fixed; bottom: 20px; right: 20px; display: none; z-index: 999;">
         ↑
     </button>
-
+ <!-- Scroll to Top Button Script -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const scrollBtn = document.getElementById("scrollToTopBtn");
@@ -232,6 +259,9 @@
         });
     </script>
 
+
+
+
     <div id="footer-container"></div>
     <script>
         fetch("../footer/footer.html")
@@ -245,6 +275,78 @@
             })
             .catch(err => console.error("Error loading footer:", err));
     </script>
+
+<script>
+    //SCRIPT FOR FAVROUITES in TILE GALLERY
+document.addEventListener("DOMContentLoaded", function () {
+  const favBtn = document.getElementById("openFavorites");
+  const closeBtn = document.getElementById("closeFavorites");
+  const favSection = document.getElementById("favorites-section");
+  const favContainer = document.getElementById("favorites-container");
+
+
+  // 🛠️ Add debug logs:
+  console.log("❤️ openFavorites:", favBtn);
+  console.log("✖️ closeFavorites:", closeBtn);
+  console.log("📦 favorites-section:", favSection);
+  console.log("📦 favorites-container:", favContainer);
+
+  // Function to render favorite tiles
+  function renderFavorites() {
+    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    favContainer.innerHTML = "";
+
+    if (favorites.length === 0) {
+      favContainer.innerHTML = "<p class='text-muted'>No favorites added yet.</p>";
+      return;
+    }
+
+    favorites.forEach(fav => {
+      const col = document.createElement("div");
+      col.className = "col-6 col-md-3";
+      col.innerHTML = `
+          <div class="card h-100 shadow-sm border-0">
+            <img src="${fav.colorImg}" class="card-img-top" alt="${fav.title}" style="height: 180px; object-fit: cover;">
+            <h6 class="bg-dark text-white py-2 fw-semibold text-center m-0">${fav.title}</h6>
+            <div class="card-body text-center px-2">
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="fw-bold text-dark">₹${fav.price}</span>
+                <i class="fa-solid fa-heart text-danger fs-5" style="cursor: pointer;" title="Remove Favorite"></i>
+              </div>
+            </div>
+          </div>
+        `;
+
+      // Remove from favorites on heart click
+      col.querySelector("i").addEventListener("click", () => {
+        removeFavorite(fav.title, fav.colorImg);
+        renderFavorites(); // Refresh UI
+      });
+
+      favContainer.appendChild(col);
+    });
+  }
+
+  // Remove favorite from localStorage
+  function removeFavorite(title, colorImg) {
+    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    favorites = favorites.filter(f => !(f.title === title && f.colorImg === colorImg));
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }
+
+  // Toggle section
+  favBtn.addEventListener("click", function () {
+    favSection.style.display = "block";
+    renderFavorites();
+    window.scrollTo({ top: favSection.offsetTop - 60, behavior: "smooth" });
+  });
+
+  closeBtn.addEventListener("click", function () {
+    favSection.style.display = "none";
+  });
+});
+</script>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
