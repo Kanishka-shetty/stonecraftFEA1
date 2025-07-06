@@ -10,7 +10,7 @@ fetch("https://meaningful-horse-99e25d03c1.strapiapp.com/api/heroes?populate=*")
   })
   .catch(error => console.error("Error loading logo image:", error));
 
-
+// Fetch the About Page data
 fetch("https://meaningful-horse-99e25d03c1.strapiapp.com/api/aboutpages?populate=*")
   .then(res => res.json())
   .then(data => {

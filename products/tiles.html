@@ -20,34 +20,41 @@
     }
 
     #scrollToTopBtn {
-  width: 40px;
-  height: 40px;
-  font-size: 20px;
-  line-height: 20px;
-  text-align: center;
-  display: none;
-  transition: opacity 0.3s ease;
-}
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+        line-height: 20px;
+        text-align: center;
+        display: none;
+        transition: opacity 0.3s ease;
+    }
 
-  @keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50%      { transform: translateY(-5px); }
-  }
+    @keyframes bounce {
 
-  #scrollToTopBtn.animate {
-    animation: bounce 1s ease-in-out infinite;
-  }
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-5px);
+        }
+    }
+
+    #scrollToTopBtn.animate {
+        animation: bounce 1s ease-in-out infinite;
+    }
 </style>
 
 <body>
     <div class="position-relative bg-dark text-white"
         style="background-image: url(''); background-size: cover; background-position: center; min-height: 30vh;">
         <nav class="navbar navbar-expand-lg navbar-dark container py-3">
-    <a class="navbar-brand" href="#">
-     <img id="logo-img" src="" alt="Stonecraft Logo" style="height: 50px;"></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+            <a class="navbar-brand" href="#">
+                <img id="logo-img" src="" alt="Stonecraft Logo" style="height: 50px;"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
             <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
                 <ul class="navbar-nav flex-row flex-wrap gap-3">
@@ -117,58 +124,58 @@
             </div>
         </div>
     </section>
-         <!-- 🔽 FLOOOR TILES SECTION 🔽 -->
-        <section id="floor-tiles" class="py-4 bg-light my-4" style="border-top: 2px dashed #ccc;">
-            <div class="container">
-                <h4 class="text-center fw-bold mb-4">FLOOR TILES</h4>
-                <div id="floor-tiles-container" class="row g-4">
-                    <!-- Tile cards will be injected here -->
-                </div>
+    <!-- 🔽 FLOOOR TILES SECTION 🔽 -->
+    <section id="floor-tiles" class="py-4 bg-light my-4" style="border-top: 2px dashed #ccc;">
+        <div class="container">
+            <h4 class="text-center fw-bold mb-4">FLOOR TILES</h4>
+            <div id="floor-tiles-container" class="row g-4">
+                <!-- Tile cards will be injected here -->
             </div>
-            <!-- View More / View Less Buttons -->
-            <div class="text-center mt-4">
-                <button id="viewMoreFloor" class="btn btn-dark btn-sm d-none">View More</button>
-                <button id="viewLessFloor" class="btn btn-outline-dark btn-sm d-none">View Less</button>
+        </div>
+        <!-- View More / View Less Buttons -->
+        <div class="text-center mt-4">
+            <button id="viewMoreFloor" class="btn btn-dark btn-sm d-none">View More</button>
+            <button id="viewLessFloor" class="btn btn-outline-dark btn-sm d-none">View Less</button>
+        </div>
+    </section>
+    <!-- 🔽 BATHROOM TILES SECTION 🔽 -->
+    <section id="bathroom-tiles" class="py-4 bg-light my-4" style="border-top: 2px dashed #ccc;">
+        <div class="container">
+            <h4 class="text-center fw-bold mb-4">BATHROOM TILES</h4>
+            <div id="bathroom-tiles-container" class="row g-4">
+                <!-- Tile cards will be injected here -->
             </div>
-        </section>
-     <!-- 🔽 BATHROOM TILES SECTION 🔽 -->
-        <section id="bathroom-tiles" class="py-4 bg-light my-4" style="border-top: 2px dashed #ccc;">
-            <div class="container">
-                <h4 class="text-center fw-bold mb-4">BATHROOM TILES</h4>
-                <div id="bathroom-tiles-container" class="row g-4">
-                    <!-- Tile cards will be injected here -->
-                </div>
-            </div>
-            <!-- View More / View Less Buttons -->
-            <div class="text-center mt-4">
-                <button id="viewMoreBathroom" class="btn btn-dark btn-sm d-none">View More</button>
-                <button id="viewLessBathroom" class="btn btn-outline-dark btn-sm d-none">View Less</button>
-            </div>
-        </section>
+        </div>
+        <!-- View More / View Less Buttons -->
+        <div class="text-center mt-4">
+            <button id="viewMoreBathroom" class="btn btn-dark btn-sm d-none">View More</button>
+            <button id="viewLessBathroom" class="btn btn-outline-dark btn-sm d-none">View Less</button>
+        </div>
+    </section>
 
-        <!-- 🔽 KITCHEN TILES SECTION 🔽 -->
-        <section id="kitchen-tiles" class="py-4 bg-light my-4" style="border-top: 2px dashed #ccc;">
-            <div class="container">
-                <h4 class="text-center fw-bold mb-4">KITCHEN TILES</h4>
-                <div id="kitchen-tiles-container" class="row g-4"></div>
-            </div>
-            <div class="text-center mt-4">
-                <button id="viewMoreKitchen" class="btn btn-dark btn-sm d-none">View More</button>
-                <button id="viewLessKitchen" class="btn btn-outline-dark btn-sm d-none">View Less</button>
-            </div>
-        </section>
+    <!-- 🔽 KITCHEN TILES SECTION 🔽 -->
+    <section id="kitchen-tiles" class="py-4 bg-light my-4" style="border-top: 2px dashed #ccc;">
+        <div class="container">
+            <h4 class="text-center fw-bold mb-4">KITCHEN TILES</h4>
+            <div id="kitchen-tiles-container" class="row g-4"></div>
+        </div>
+        <div class="text-center mt-4">
+            <button id="viewMoreKitchen" class="btn btn-dark btn-sm d-none">View More</button>
+            <button id="viewLessKitchen" class="btn btn-outline-dark btn-sm d-none">View Less</button>
+        </div>
+    </section>
 
-        <!-- 🔽 GENERAL TILES SECTION 🔽 -->
-        <section id="general-tiles" class="py-4 bg-light my-4" style="border-top: 2px dashed #ccc;">
-            <div class="container">
-                <h4 class="text-center fw-bold mb-4">GENERAL TILES</h4>
-                <div id="general-tiles-container" class="row g-4"></div>
-            </div>
-            <div class="text-center mt-4">
-                <button id="viewMoreGeneral" class="btn btn-dark btn-sm d-none">View More</button>
-                <button id="viewLessGeneral" class="btn btn-outline-dark btn-sm d-none">View Less</button>
-            </div>
-        </section>
+    <!-- 🔽 GENERAL TILES SECTION 🔽 -->
+    <section id="general-tiles" class="py-4 bg-light my-4" style="border-top: 2px dashed #ccc;">
+        <div class="container">
+            <h4 class="text-center fw-bold mb-4">GENERAL TILES</h4>
+            <div id="general-tiles-container" class="row g-4"></div>
+        </div>
+        <div class="text-center mt-4">
+            <button id="viewMoreGeneral" class="btn btn-dark btn-sm d-none">View More</button>
+            <button id="viewLessGeneral" class="btn btn-outline-dark btn-sm d-none">View Less</button>
+        </div>
+    </section>
 
     <!-- 🟦 Quick View Modal -->
     <div class="modal fade" id="quickViewModal" tabindex="-1" aria-labelledby="quickViewModalLabel" aria-hidden="true">
@@ -183,7 +190,11 @@
                     <img id="modalTileImg" src="" class="img-fluid mb-3"
                         style="width: 100%; height: 300px; object-fit: contain; background-color: #f8f9fa; border: 1px solid #dee2e6;"
                         alt="Tile Image">
-                    <h5 id="modalTileTitle" class="fw-semibold"></h5>
+                    <!-- <h5 id="modalTileTitle" class="fw-semibold"></h5> -->
+                    <div class="d-flex justify-content-center align-items-center gap-2">
+                        <h5 id="modalTileTitle" class="fw-semibold mb-0"></h5>
+                        <i id="modalFavBtn" class="fa-regular fa-heart fs-5" style="cursor: pointer;"></i>
+                    </div>
                     <p id="modalTilePrice" class="fw-bold text-muted mb-3"></p>
 
                     <!-- Color Circles -->
@@ -194,31 +205,32 @@
     </div>
     <script src="tileheading-script.js"></script>
 
-<button id="scrollToTopBtn" class="btn btn-dark rounded-circle shadow" style="position: fixed; bottom: 20px; right: 20px; display: none; z-index: 999;">
-  ↑
-</button>
+    <button id="scrollToTopBtn" class="btn btn-dark rounded-circle shadow"
+        style="position: fixed; bottom: 20px; right: 20px; display: none; z-index: 999;">
+        ↑
+    </button>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const scrollBtn = document.getElementById("scrollToTopBtn");
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const scrollBtn = document.getElementById("scrollToTopBtn");
 
-    // Show button after scrolling 300px with animation
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 300) {
-        scrollBtn.style.display = "block";
-        scrollBtn.classList.add("animate");
-      } else {
-        scrollBtn.style.display = "none";
-        scrollBtn.classList.remove("animate");
-      }
-    });
+            // Show button after scrolling 300px with animation
+            window.addEventListener("scroll", () => {
+                if (window.scrollY > 300) {
+                    scrollBtn.style.display = "block";
+                    scrollBtn.classList.add("animate");
+                } else {
+                    scrollBtn.style.display = "none";
+                    scrollBtn.classList.remove("animate");
+                }
+            });
 
-    // Smooth scroll to top
-    scrollBtn.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-  });
-</script>
+            // Smooth scroll to top
+            scrollBtn.addEventListener("click", () => {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+        });
+    </script>
 
     <div id="footer-container"></div>
     <script>

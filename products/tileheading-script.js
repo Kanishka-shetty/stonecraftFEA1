@@ -1,3 +1,4 @@
+
 // SCRIPT FOR LOGO
 fetch("https://meaningful-horse-99e25d03c1.strapiapp.com/api/heroes?populate=*")
   .then(res => res.json())
@@ -11,7 +12,7 @@ fetch("https://meaningful-horse-99e25d03c1.strapiapp.com/api/heroes?populate=*")
   })
   .catch(error => console.error("Error loading logo image:", error));
 
-
+// SCRIPT TO LOAD TILE HEADING AND BACKGROUND IMAGE
 fetch('https://meaningful-horse-99e25d03c1.strapiapp.com/api/tileheading?populate=images')
   .then(res => res.json())
   .then(data => {
@@ -77,6 +78,8 @@ fetch("https://meaningful-horse-99e25d03c1.strapiapp.com/api/tilecategories?popu
   });
 
 // SCRIPT FOR VIEW BUTTON UNDER EACH PRODUCT GRID
+let selectedColor = ""; // global inside view-btn click
+
 document.addEventListener("click", function (e) {
   if (e.target && e.target.classList.contains("view-btn")) {
     const button = e.target;
@@ -87,10 +90,13 @@ document.addEventListener("click", function (e) {
     // Set modal content
     document.getElementById("modalTileTitle").textContent = title;
     document.getElementById("modalTilePrice").textContent = `₹${price}`;
-    console.log("Clicked button:", title, price, colors);
-    document.getElementById("modalTileImg").src = colors[0] || "";
+    selectedColor = colors[0] || ""; // default color
+    document.getElementById("modalTileImg").src = selectedColor;
 
-    // Clear and add color circles
+    // Update ❤️ icon state
+    updateHeartIcon(title, selectedColor);
+
+    // Generate color buttons
     const colorContainer = document.getElementById("colorVariants");
     colorContainer.innerHTML = "";
     colors.forEach((colorUrl, index) => {
@@ -103,12 +109,54 @@ document.addEventListener("click", function (e) {
       btn.style.backgroundPosition = "center";
       btn.title = `Color ${index + 1}`;
       btn.onclick = () => {
-        document.getElementById("modalTileImg").src = colorUrl;
+        selectedColor = colorUrl;
+        document.getElementById("modalTileImg").src = selectedColor;
+        updateHeartIcon(title, selectedColor); // refresh icon if user changes color
       };
       colorContainer.appendChild(btn);
     });
   }
 });
+
+// ❤️ FAVORITE BUTTON LOGIC
+document.getElementById("modalFavBtn").addEventListener("click", function () {
+  const title = document.getElementById("modalTileTitle").textContent;
+  const price = document.getElementById("modalTilePrice").textContent.replace("₹", "");
+  const colorImg = selectedColor;
+
+  const fav = { title, price, colorImg };
+  let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+  const exists = favorites.some(f => f.title === fav.title && f.colorImg === fav.colorImg);
+
+  if (exists) {
+    // Remove if already exists
+    favorites = favorites.filter(f => !(f.title === fav.title && f.colorImg === fav.colorImg));
+  } else {
+    // Add new
+    favorites.push(fav);
+  }
+
+  localStorage.setItem("favorites", JSON.stringify(favorites));
+  updateHeartIcon(title, colorImg); // update icon after toggle
+});
+
+// Helper to update ❤️ icon
+function updateHeartIcon(title, colorImg) {
+  const icon = document.getElementById("modalFavBtn");
+  const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+  const exists = favorites.some(f => f.title === title && f.colorImg === colorImg);
+
+if (exists) {
+  icon.classList.remove("fa-regular");
+  icon.classList.add("fa-solid");
+  icon.style.color = "red"; // ❤️ red when favorited
+} else {
+  icon.classList.remove("fa-solid");
+  icon.classList.add("fa-regular");
+  icon.style.color = "black"; // outline black when not favorited
+}
+}
 
 // SCRIPT TO LOAD TILES FROM STRAPI API
 document.addEventListener("DOMContentLoaded", function () {
@@ -234,3 +282,39 @@ document.addEventListener("DOMContentLoaded", function () {
       })
       .catch(err => console.error("Error fetching tiles:", err));
   });
+
+
+
+// SCRIPT FOR VIEW BUTTON UNDER EACH PRODUCT GRID
+// document.addEventListener("click", function (e) {
+//   if (e.target && e.target.classList.contains("view-btn")) {
+//     const button = e.target;
+//     const title = button.getAttribute("data-title");
+//     const price = button.getAttribute("data-price");
+//     const colors = JSON.parse(button.getAttribute("data-colors") || "[]");
+
+//     // Set modal content
+//     document.getElementById("modalTileTitle").textContent = title;
+//     document.getElementById("modalTilePrice").textContent = `₹${price}`;
+//     console.log("Clicked button:", title, price, colors);
+//     document.getElementById("modalTileImg").src = colors[0] || "";
+
+//     // Clear and add color circles
+//     const colorContainer = document.getElementById("colorVariants");
+//     colorContainer.innerHTML = "";
+//     colors.forEach((colorUrl, index) => {
+//       const btn = document.createElement("button");
+//       btn.className = "border rounded-circle p-2";
+//       btn.style.width = "40px";
+//       btn.style.height = "40px";
+//       btn.style.backgroundImage = `url(${colorUrl})`;
+//       btn.style.backgroundSize = "cover";
+//       btn.style.backgroundPosition = "center";
+//       btn.title = `Color ${index + 1}`;
+//       btn.onclick = () => {
+//         document.getElementById("modalTileImg").src = colorUrl;
+//       };
+//       colorContainer.appendChild(btn);
+//     });
+//   }
+// });
