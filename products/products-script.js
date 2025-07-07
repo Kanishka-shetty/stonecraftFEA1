@@ -26,7 +26,7 @@ fetch("https://meaningful-horse-99e25d03c1.strapiapp.com/api/products?populate=i
       card.innerHTML = `
         <div class="product-title">${name}</div>
         <img class="product-img" src="${fullImageUrl}" alt="${name}" />
-        <a href="products/${slug}.html" class="btn btn-outline-light btn-sm mt-2">Read More</a>
+        <a href="products/${slug}.html" class="btn btn-outline-light btn-sm mt-2">View More</a>
       `;
 
       col.appendChild(card);      // add card to column

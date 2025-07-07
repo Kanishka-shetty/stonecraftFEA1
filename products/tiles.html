@@ -45,15 +45,39 @@
         animation: bounce 1s ease-in-out infinite;
     }
 
-@keyframes heartbeat {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.2); }
-}
+    @keyframes heartbeat {
 
-#openFavorites {
-  animation: heartbeat 1.2s infinite ease-in-out;
-  color: rgb(18, 110, 209);
-}
+        0%,
+        100% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.2);
+        }
+    }
+
+    #openFavorites {
+        animation: heartbeat 1.2s infinite ease-in-out;
+        color: crimson;
+    }
+
+    /* For tile sections */
+    @keyframes fadeSlideUp {
+        0% {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-fade-up {
+        animation: fadeSlideUp 4s ease-out both;
+    }
 </style>
 
 <body>
@@ -61,7 +85,7 @@
         style="background-image: url(''); background-size: cover; background-position: center; min-height: 30vh;">
         <nav class="navbar navbar-expand-lg navbar-dark container py-3">
             <a class="navbar-brand" href="#">
-                <img id="logo-img" src="" alt="Stonecraft Logo" style="height: 50px;"></a>
+                <img id="logo-img" src="" alt="Thengumpallykunnel" style="height: 50px;"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -123,7 +147,7 @@
     </div>
 
     <!-- 🔽 WALL TILES SECTION 🔽 -->
-    <section id="wall-tiles" class="py-4 bg-light my-4" style="border-top: 2px dashed #ccc;">
+    <section id="wall-tiles" class="py-4 bg-light my-4 animate-fade-up ">
         <div class="container">
             <h4 class="text-center fw-bold mb-4">WALL TILES</h4>
 
@@ -140,7 +164,7 @@
         </div>
     </section>
     <!-- 🔽 FLOOOR TILES SECTION 🔽 -->
-    <section id="floor-tiles" class="py-4 bg-light my-4" style="border-top: 2px dashed #ccc;">
+    <section id="floor-tiles" class="py-4 my-4 animate-fade-up " style="background-color: #f2f4f7;">
         <div class="container">
             <h4 class="text-center fw-bold mb-4">FLOOR TILES</h4>
             <div id="floor-tiles-container" class="row g-4">
@@ -154,7 +178,7 @@
         </div>
     </section>
     <!-- 🔽 BATHROOM TILES SECTION 🔽 -->
-    <section id="bathroom-tiles" class="py-4 bg-light my-4" style="border-top: 2px dashed #ccc;">
+    <section id="bathroom-tiles" class="py-4 bg-light my-4 animate-fade-up ">
         <div class="container">
             <h4 class="text-center fw-bold mb-4">BATHROOM TILES</h4>
             <div id="bathroom-tiles-container" class="row g-4">
@@ -169,7 +193,7 @@
     </section>
 
     <!-- 🔽 KITCHEN TILES SECTION 🔽 -->
-    <section id="kitchen-tiles" class="py-4 bg-light my-4" style="border-top: 2px dashed #ccc;">
+    <section id="kitchen-tiles" class="py-4 my-4 animate-fade-up" style="background-color: #f2f4f7;">
         <div class="container">
             <h4 class="text-center fw-bold mb-4">KITCHEN TILES</h4>
             <div id="kitchen-tiles-container" class="row g-4"></div>
@@ -181,9 +205,9 @@
     </section>
 
     <!-- 🔽 GENERAL TILES SECTION 🔽 -->
-    <section id="general-tiles" class="py-4 bg-light my-4" style="border-top: 2px dashed #ccc;">
+    <section id="general-tiles" class="py-4 bg-light my-4 animate-fade-up">
         <div class="container">
-            <h4 class="text-center fw-bold mb-4">GENERAL TILES</h4>
+            <h4 class="text-center fw-bold mb-4" data-aos="slide-left">GENERAL TILES</h4>
             <div id="general-tiles-container" class="row g-4"></div>
         </div>
         <div class="text-center mt-4">
@@ -219,16 +243,16 @@
         </div>
     </div>
 
-<!-- 🧡 FAVORITES SECTION -->
-<section id="favorites-section" class="container my-4" style="display: none;">
-  <div class="d-flex justify-content-between align-items-center mb-3">
-    <h3 class="mb-0">Your Favorites</h3>
-    <button id="closeFavorites" class="btn btn-sm btn-outline-dark">Close</button>
-  </div>
-  <div id="favorites-container" class="row g-3">
-    <!-- Favorite cards will be injected here -->
-  </div>
-</section>
+    <!-- 🧡 FAVORITES SECTION -->
+    <section id="favorites-section" class="container my-4" style="display: none;">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h3 class="mb-0">Your Favorites</h3>
+            <button id="closeFavorites" class="btn btn-sm btn-outline-dark">Close</button>
+        </div>
+        <div id="favorites-container" class="row g-3">
+            <!-- Favorite cards will be injected here -->
+        </div>
+    </section>
 
     <script src="tileheading-script.js"></script>
 
@@ -236,7 +260,7 @@
         style="position: fixed; bottom: 20px; right: 20px; display: none; z-index: 999;">
         ↑
     </button>
- <!-- Scroll to Top Button Script -->
+    <!-- Scroll to Top Button Script -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const scrollBtn = document.getElementById("scrollToTopBtn");
@@ -259,9 +283,6 @@
         });
     </script>
 
-
-
-
     <div id="footer-container"></div>
     <script>
         fetch("../footer/footer.html")
@@ -276,35 +297,35 @@
             .catch(err => console.error("Error loading footer:", err));
     </script>
 
-<script>
-    //SCRIPT FOR FAVROUITES in TILE GALLERY
-document.addEventListener("DOMContentLoaded", function () {
-  const favBtn = document.getElementById("openFavorites");
-  const closeBtn = document.getElementById("closeFavorites");
-  const favSection = document.getElementById("favorites-section");
-  const favContainer = document.getElementById("favorites-container");
+    <script>
+        //SCRIPT FOR FAVROUITES in TILE GALLERY
+        document.addEventListener("DOMContentLoaded", function () {
+            const favBtn = document.getElementById("openFavorites");
+            const closeBtn = document.getElementById("closeFavorites");
+            const favSection = document.getElementById("favorites-section");
+            const favContainer = document.getElementById("favorites-container");
 
 
-  // 🛠️ Add debug logs:
-  console.log("❤️ openFavorites:", favBtn);
-  console.log("✖️ closeFavorites:", closeBtn);
-  console.log("📦 favorites-section:", favSection);
-  console.log("📦 favorites-container:", favContainer);
+            // 🛠️ Add debug logs:
+            console.log("❤️ openFavorites:", favBtn);
+            console.log("✖️ closeFavorites:", closeBtn);
+            console.log("📦 favorites-section:", favSection);
+            console.log("📦 favorites-container:", favContainer);
 
-  // Function to render favorite tiles
-  function renderFavorites() {
-    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-    favContainer.innerHTML = "";
+            // Function to render favorite tiles
+            function renderFavorites() {
+                const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+                favContainer.innerHTML = "";
 
-    if (favorites.length === 0) {
-      favContainer.innerHTML = "<p class='text-muted'>No favorites added yet.</p>";
-      return;
-    }
+                if (favorites.length === 0) {
+                    favContainer.innerHTML = "<p class='text-muted'>No favorites added yet.</p>";
+                    return;
+                }
 
-    favorites.forEach(fav => {
-      const col = document.createElement("div");
-      col.className = "col-6 col-md-3";
-      col.innerHTML = `
+                favorites.forEach(fav => {
+                    const col = document.createElement("div");
+                    col.className = "col-6 col-md-3";
+                    col.innerHTML = `
           <div class="card h-100 shadow-sm border-0">
             <img src="${fav.colorImg}" class="card-img-top" alt="${fav.title}" style="height: 180px; object-fit: cover;">
             <h6 class="bg-dark text-white py-2 fw-semibold text-center m-0">${fav.title}</h6>
@@ -317,36 +338,36 @@ document.addEventListener("DOMContentLoaded", function () {
           </div>
         `;
 
-      // Remove from favorites on heart click
-      col.querySelector("i").addEventListener("click", () => {
-        removeFavorite(fav.title, fav.colorImg);
-        renderFavorites(); // Refresh UI
-      });
+                    // Remove from favorites on heart click
+                    col.querySelector("i").addEventListener("click", () => {
+                        removeFavorite(fav.title, fav.colorImg);
+                        renderFavorites(); // Refresh UI
+                    });
 
-      favContainer.appendChild(col);
-    });
-  }
+                    favContainer.appendChild(col);
+                });
+            }
 
-  // Remove favorite from localStorage
-  function removeFavorite(title, colorImg) {
-    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-    favorites = favorites.filter(f => !(f.title === title && f.colorImg === colorImg));
-    localStorage.setItem("favorites", JSON.stringify(favorites));
-  }
+            // Remove favorite from localStorage
+            function removeFavorite(title, colorImg) {
+                let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+                favorites = favorites.filter(f => !(f.title === title && f.colorImg === colorImg));
+                localStorage.setItem("favorites", JSON.stringify(favorites));
+            }
 
-  // Toggle section
-  favBtn.addEventListener("click", function () {
-    favSection.style.display = "block";
-    renderFavorites();
-    window.scrollTo({ top: favSection.offsetTop - 60, behavior: "smooth" });
-  });
+            // Toggle section
+            favBtn.addEventListener("click", function () {
+                favSection.style.display = "block";
+                renderFavorites();
+                window.scrollTo({ top: favSection.offsetTop - 60, behavior: "smooth" });
+            });
 
-  closeBtn.addEventListener("click", function () {
-    favSection.style.display = "none";
-  });
-});
-</script>
-    
+            closeBtn.addEventListener("click", function () {
+                favSection.style.display = "none";
+            });
+        });
+    </script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
